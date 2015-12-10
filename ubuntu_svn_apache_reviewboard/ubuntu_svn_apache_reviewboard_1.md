@@ -235,7 +235,7 @@ Install & Config 参考文章： [http://www.linuxidc.com/Linux/2014-05/101222.h
 
 	- 命令行 curl
 
-			$ curl http://review.ppdai.com/r/ | grep review
+			$ curl http://review.xxx.com/r/ | grep review
 			  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 			                                 Dload  Upload   Total   Spent    Left  Speed
 			        MANUAL_URL = 'https://www.reviewboard.org/docs/manual/2.5/',

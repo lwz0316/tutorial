@@ -109,7 +109,7 @@
 
 - 在 ReviewBoard 中创建一个代码仓库
 
-	- 访问 `http://review.ppdai.com/admin/`， 使用 `admin` 用户登录。
+	- 访问 `http://review.xxx.com/admin/`， 使用 `admin` 用户登录。
 
 	- 选择`Repositories`
 
@@ -139,7 +139,7 @@
 			Use the Subversion repository "repo" (http://localhost/svn)? [Yes/No]: yes
 			Create "/home/lwz/repo/.reviewboardrc" with the following?
 
-			REVIEWBOARD_URL = "http://review.ppdai.com"
+			REVIEWBOARD_URL = "http://review.xxx.com"
 			REPOSITORY = "repo"
 			
 			 [Yes/No]: yes
