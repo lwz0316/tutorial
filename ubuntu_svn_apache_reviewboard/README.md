@@ -1,4 +1,4 @@
-代码 Review 环境搭建 
+Code Review 环境搭建 
 ===
 > Ubuntu Server + Apache + SVN + ReviewBoard
 
