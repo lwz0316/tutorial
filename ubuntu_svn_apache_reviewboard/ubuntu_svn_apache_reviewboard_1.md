@@ -59,8 +59,9 @@ Install & Config 参考文章： [http://www.linuxidc.com/Linux/2014-05/101222.h
 
 - 安装 memcached
 
-	ReviewBoard 需要 memcached 的支持
+	ReviewBoard 需要 memcached 的支持(详细资料[Ubuntu下安装memcache，以及python-memcache](http://www.xuebuyuan.com/1499126.html))
 
+		$ apt-get install memcached
 		$ easy_install libmemcache-dev python-memcached
 
 - 安装 mod-wsgi 模块
