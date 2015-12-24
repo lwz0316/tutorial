@@ -181,7 +181,7 @@ Volley设置网络请求生命周期的一种方法
 		}	
 	}
 
-上面的 `cancelRequest()` 方法中使用了一个由 `Volley` 提供的 `RequestFilter` 类，该类是为了判断 `url` 是否在白名单中，那么久不取消。否则如果 `Tag` 一至就取消请求。具体实现如下
+上面的 `cancelRequest()` 方法中使用了一个由 `Volley` 提供的 `RequestFilter` 类，该类是为了判断 `url` 是否在白名单中，那么久不取消。否则如果 `Tag` 一致就取消请求。具体实现如下
 
 	public abstract class VolleyRequestFilter implements RequestQueue.RequestFilter {
 
