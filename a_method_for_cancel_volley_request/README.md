@@ -37,7 +37,7 @@ Volley设置网络请求生命周期的一种方法
 
 也就是说，要取消网络请求，必须要在 `Request` 中设置一个 Tag, 并且将 Tag 保存起来，等到要取消的时候使用。
 
-## 改造既有代码
+## 相关理论
 
 明白了 `Volley` 取消 `Request` 的方法后，就剩下找到一个办法去获得一个即在 `Activity`/`Fragment`中能得到又在`RequestClient`中能得到的 Tag了
 
@@ -76,7 +76,7 @@ Volley设置网络请求生命周期的一种方法
 
 `Tag` 的生成还需要对内部类对象的 `toString()` 方法进行截取，只截取 `$` 这个神奇的符号的前半部分，为啥呢？因为后面的那一部分不是固定的，外部类无法获取，外部类只知道自己的名字，这就用够了。
 
-## 实践
+## 改造既有代码
 
 ### VolleyHttpLifeCircleHelper
 为了 `Activity` / `Fragment` 与 `RequestClient` 调用方便，我将生成 `Tag` 与取消 `Volley` 的行为封装成了一个帮助类 `VolleyHttpLifeCircleHelper`，并提供了下面的方法
