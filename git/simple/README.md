@@ -442,6 +442,188 @@ Git 不会自动将之纳入跟踪范围，除非你明明白白地告诉它“�
 		        desc.txt
 	然后 `git commit` 即可，可以看到本地工作区还保留着 `desc.txt` 文件。这个时候，`desc.txt` 就是未跟踪状态，我们可以在 `.gitignore` 中重新忽略它。
 
-#### 移动文件
 
+### 查看提交历史
+
+在提交了若干更新后，或者你 Clone 了某个项目，想回顾下提交历史，可以使用 `git log` 命令查看
+
+	$ git log
+	commit f6cb19981d5312cd6e9b803e908d44f5f80a8c9e
+	Author: Liu Wenzhu <lwz0316@gmail.com>
+	Date:   Fri May 20 10:16:29 2016 +0800
 	
+	    delete desc file
+	
+	commit 3cbfa1b189462fd52527ced09cc7346adb760e62
+	Author: Liu Wenzhu <lwz0316@gmail.com>
+	Date:   Fri May 20 08:05:40 2016 +0800
+	
+	    update README, add company name
+	
+	...
+
+默认不用参数的话，`git log` 会按照提交时间列出所有的更新，最近的历史在最上面。
+
+`git log` 有许多选项可以帮助我们搜索感兴趣的提交，下面介绍几个最常用的
+
+- `git log -N` 其中 N 是自然数，表示显示 N 条数据
+- `git log -p` 表示在显示基本信息的同时也显示内容的差异
+- `git log --stat` 仅显示简要的增改行数统计
+- `git log --graph` 可以看到开头多出一些 ASCII 字符串表示的简单图形，形象地展示了每个提交所在的分支及其分化衍合情况
+
+使用 `git help log` 查看其他 log 相关的命令吧！
+
+### 撤销操作
+谁都想有后悔药吃，Git 也提供了一些让我们后悔的命令。 
+	
+	请注意，有些撤销操作是不可逆的，所以请务必谨慎小心，一旦失误，就有可能丢失部分工作成果。
+
+#### 修改最后一次提交
+
+有时候我们提交完了才发现漏掉了几个文件没有加，或者提交信息写错了。想要撤消刚才的提交操作，可以使用 `--amend` 选项重新提交
+
+	$ git commit --amend
+	
+然后修改提交信息，并保存。
+
+如果刚才提交时忘了暂存某些修改，可以先补上暂存操作，然后再运行 `--amend`
+
+	$ git add forgotten_files
+	$ git commit --amend 
+
+请注意，**不要在同步到远程仓库后还进行撤销操作**，因为重新修改的提交的索引是不一样的，因为修改的时间戳改变了，故索引值也随之改变，如果这时候推送到远程仓库，那么远程仓库会有两条修改都一致但是提交信息不一致的记录，这会使其他开发者困惑。
+
+#### 取消已经暂存的文件
+
+你可能已经注意到当你将文件放入暂存区然后查看状态时，打印的信息
+
+	$ git status
+	On branch master
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+
+        	modified:   README.md
+
+是的，上面（）中的提示
+	
+	use "git reset HEAD <file>..." to unstage
+
+我们可以使用上面的命令让暂存取中的文件状态重新回到未暂存状态
+
+	$ git reset HEAD README.md
+	Unstaged changes after reset:
+	M       README.md
+
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+	
+	        modified:   README.md
+	
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+#### 取消对文件的修改
+
+是的，细心的同学肯定在上面的执行结果中，又捕捉到了一条有意思的信息
+	
+	use "git checkout -- <file>..." to discard changes in working directory
+
+可以取消对文件的修改
+
+	$ git checkout -- README.md
+	$ git status
+	On branch master
+	nothing to commit, working directory clean
+
+> 其实 Git 会给你很多的提示，只要你善于观察。 
+
+### 远程仓库的使用
+
+要参与任何一个 Git 项目的协作，必须要了解该如何管理远程仓库。远程仓库是指托管在网络上的项目仓库，可能会有好多个，其中有些你只能读，另外有些可以写。
+
+管理远程仓库的工作，包括添加远程库，移除废弃的远程库，管理各式远程库分支，定义是否跟踪这些分支，等等。
+
+#### 查看当前的远程库
+
+要查看当前的配置有哪些远程仓库，可以使用 `git remote` 命令，它会列出每个远程仓库的别名
+
+	$ git remote
+	origin
+
+说明只有一个别名为 `origin` 的远程仓库，但是信息量太少了，可以在后面加个 `-v`
+
+	$ git remote -v
+	origin  https://github.com/lwz0316/tutorial.git (fetch)
+	origin  https://github.com/lwz0316/tutorial.git (push)
+
+可以看到 拉取的仓库和推送的仓库及他们的地址，虽然都是同一个。
+
+#### 添加远程仓库
+
+添加一个新的远程仓库，可以制定一个别名，以便将来使用或者自己识别使用命令 `git remote add [alise] [url]`即可
+
+	$ git remote add ppdai http://192.168.211.238/liuwenzhu/tutorial.git
+
+	$ git remote -v
+	origin  https://github.com/lwz0316/tutorial.git (fetch)
+	origin  https://github.com/lwz0316/tutorial.git (push)
+	ppdai   http://192.168.211.238/liuwenzhu/tutorial.git (fetch)
+	ppdai   http://192.168.211.238/liuwenzhu/tutorial.git (push)
+
+可以看到我们成功添加了 `ppdai` Git 服务器的远程仓库
+
+#### 从远程仓库抓取数据
+
+将远程的仓库的数据抓取到本地
+
+	git fetch [remote-name]
+	
+如果是克隆了一个仓库，此命令会自动将远程仓库归于 origin 名下。所以，git fetch origin 会抓取从你上次克隆以来别人上传到此远程仓库中的所有更新（或是上次 fetch 以来别人提交的更新）。
+
+> 有一点很重要，需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能手工合并。
+
+可以使用 `git pull` 命令自动抓取数据下来，然后将远端分支自动合并到本地仓库中**当前分支**。
+
+#### 推送数据到远程仓库
+项目进行到一个阶段，要同别人分享目前的成果，可以将本地仓库推送到远程仓库。
+	
+	git push [remote-name] [branch-name]
+
+如果在你推数据前，已经有其他人推送了若干更新，那你的推送操作就会被驳回。你必须先把他们的更新抓取到本地，合并到自己的项目中，然后才可以再次推送
+
+#### 查看远程仓库信息
+
+我们可以通过命令 `git remote show [remote-name]` 查看某个远程仓库的详细信息
+
+	$ git remote show origin
+	* remote origin
+	  Fetch URL: https://github.com/lwz0316/tutorial.git
+	  Push  URL: https://github.com/lwz0316/tutorial.git
+	  HEAD branch: master
+	  Remote branch:
+	    master tracked
+	  Local branch configured for 'git pull':
+	    master merges with remote master
+	  Local ref configured for 'git push':
+	    master pushes to master (up to date)
+
+它友善地告诉你如果是在 `master` 分支，就可以用 `git pull` 命令抓取数据合并到本地。另外还列出了所有处于跟踪状态中的远端分支。
+
+#### 远程仓库的删除和重命名
+想修改远程仓库在本地的别名，可以使用下面的命令
+
+	git remote rename [old name] [new name]
+
+对远程仓库的重命名，也会使对应的分支名称发生变化，比如原来的 origin/master 分支现在成了 ppdai/master
+
+删除远程仓库，可以使用命令 
+
+	git remote rm [name]
+
+
+## Git 分支
+
+
+## Git 工作流
