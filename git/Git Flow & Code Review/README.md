@@ -58,7 +58,7 @@ Git Flow 模型全貌图
 于是，小强和小文商量了一下，由小强进行 1.1 提测版本的修复，小文进行 1.0 线上bug 的修复。
 
 #### 小强的工作步骤：
-- 将手头上的1.2相关需求代码进行提交到 `feature/xiaoqiang/1.2` 上
+- 将手头上的 1.2 相关需求代码进行提交到 `feature/xiaoqiang/1.2` 上
 - 切换到 `release/1.1` 去准备修bug
 - 修复完 bug 后，自测完成后，将代码提交到 `release/1.1` 中
 - 同时将`release/1.1`的代码合并到`develop` 中
@@ -68,7 +68,7 @@ Git Flow 模型全貌图
 - 切回到 `feature/xiaoqiang/1.2` 进行 1.2 的需求开发
 
 #### 小文的工作步骤
-- 将手头上的1.2相关需求代码进行提交到 `feature/xiaowen/1.2` 上
+- 将手头上的 1.2 相关需求代码进行提交到 `feature/xiaowen/1.2` 上
 - 切换到 `master` 上（由于 master 是最近的发布版本，所以切换到 master 就是线上的代码）
 - 基于 `master` 开一个 `hotfix/1.0` 分支, 在这上面进行修复线上问题
 - 修复完成后，自测通过后，将代码提交，并让测试同学进行测试
@@ -89,16 +89,33 @@ Git Flow 模型全貌图
 ### 创建 Merge request
 创建 Merge Request 是通过 Gitlab 平台进行的，前提就是要将待合并的分支推送到 Gitlab 服务器上。 我们知道，普通开发者要 push 代码到 `protected` 分支是被拒绝的。 这样就存在一个问题，普通开发者如何创建 Merge Request?
 
-针对上述问题，其中的一个解决方法就是开临时分支，通过辅助分支，将代码提交到 GitLab 上，然后使用 `Merge Request` 将其合并到 `protected` 的分支，然后在 Code Review 通过并执行 merge 之后，将临时分支删除就可以了。
+针对上述问题，有两个方法可以解决，分别是 `开临时分支`和 `fork 项目`。
 
-另一个解决方法就是通过 fork 项目的方式进行的，大家可以自己了解一下 [Github flow](https://guides.github.com/introduction/flow/)
+#### 开临时分支
+通过辅助分支，将代码提交到 GitLab 上，然后使用 `Merge Request` 将其合并到 `protected` 的分支，然后在 Code Review 通过并执行 merge 之后，将临时分支删除就可以了。
 
-#### 举个例子
-拥有普通开发者权限的 小文 在完成 `feature/modify_home_ui` 分支后，将其合并到 `develop` （也许需要解决可能存在的冲突）。这个时候，他是无法 push `develop` 分支的，因为没有权限。
+##### 举个例子
+拥有普通开发者权限的 小文 在完成 `feature/add_sub_title` 分支后，将其合并到 `develop` （也许需要解决可能存在的冲突）。这个时候，他是无法 push `develop` 分支的，因为没有权限。
 
-于是，小文基于 `develop` 分支创建一个新的 review 分支 `review/xiaowen/modify_home_ui`，推送到远端，然后通过 Gitlab 后台创建 Merge Request （`review/xiaowen/modify_home_ui` => `develop`）。
+于是，小文基于 `develop` 分支创建一个新的 review 分支 `review/xiaowen/add_sub_title`，推送到远端，然后通过 Gitlab 后台创建 Merge Request （`review/xiaowen/add_sub_title` => `develop`）。
 
 在小文提交了 Merge Request 后，小军作为项目 Owner，通过邮件看到了小文的 Merge Request，于是就开始进入 Code Review 流程。
+
+1. 选择待审核的分支
+
+	![](img/create-merge-request_1.png)
+
+2. 编辑信息
+	
+	![](img/create-merge-request_2.png)
+
+3. 创建完成
+
+	![](img/create-merge-request_3.png)
+
+
+#### Fork 项目
+通过 fork 项目的方式在 Github 上用的比较多，大家可以自己了解一下 [Github flow](https://guides.github.com/introduction/flow/)
 
 ### Code Review
 在 Code Review 中如果只有 Owner 一个人 Review，往往会出现遗漏，所以至少应该两个人（这里说的是至少3个人 的项目）。那么问题来了，在 Gitlab 中往往只有被提交者指定的人才能收到 Merge Request 的邮件，但是只有 Owner 才能 Merge 代码，那么如何让其他人参与 Review 呢？
