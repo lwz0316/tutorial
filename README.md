@@ -9,5 +9,7 @@ Tutorial
 - [Volley设置网络请求生命周期的一种方法](a_method_for_cancel_volley_request/README.md) 
 
 - [Git 简易教程](git/simple/README.md) 
+
+- [Git Flow & Gitlab based Code Review](git/Git Flow & Code Review/README.md) 
 	
 	
