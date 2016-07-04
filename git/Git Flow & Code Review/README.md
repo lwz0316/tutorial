@@ -123,11 +123,49 @@ Git Flow 模型全貌图
 #### 多人 Review 规则
 根据 Gitlab 的功能，我们规定 Merge Requset 的接收者必须指定 项目的 Owner， Owner 在收到 Merge Request 后，可以指定项目中的成员进行 Review 代码，具体的流程为： 
 
-- 在 Merge Request 中添加一条评论，使用`@`符号，指定特定的成员（也可以使用 `@all` 指定项目中的所有成员），指定的人就可以收到邮件，去后台 Review 代码了
+- Owner 在 Merge Request 中添加一条评论，使用`@`符号，指定特定的成员（也可以使用 `@all` 指定项目中的所有成员），指定的人就可以收到邮件，去后台 Review 代码了
+
+	- 项目 Owner 指定成员进行 Review
+	
+		![项目 Owner 指定成员进行 Review](img/code-review_1.png)
+
+	- 项目 成员 接到通知进行 Review
+	
+		![项目 成员 接到通知进行 Review](img/code-review_2.png)
+
 - 被指定的成员，查看待Review 的代码，如果代码符合逻辑和遵循 Code Style，那么你可以点击`赞`的符号进行通过，否则，你在代码中添加评论，说明代码中不符合规范的地方，创建 Merge Request 的成员即可收到邮件，对代码进行相应的修改
-- Merge Request 的创建者修改完代码后，对评论进行回复，要求重新 Review
+
+	- Reviewer 对 Code 进行 Review，并评论
+
+		![项目 成员 接到通知进行 Review](img/code-review_3.png)
+
+	- Reviewer 对 Code 进行点`赞`，表示通过
+
+		![项目 成员 接到通知进行 Review](img/code-review_5.png)
+
+- Merge Request 的创建者修改完代码后，Merge Request 就有了记录，继续 Review 流程
+
+	![项目 成员 接到通知进行 Review](img/code-review_4.png)
+
 - 项目 Owner 是否 Merge 的依据就是 `赞` 的个数。`赞`的人多了，离 Merge 就不远了
 
+	- 这个 Merge Request 收集到了 2 个赞
+		
+		![有了2个赞](img/code-review_6.png)
+
+	- Owner 决定通过 Review，进行 合并
+
+		![进行合并](img/code-review_7.png)
+	
+	- 合并完成后，就可以将 `review` 分支删掉了, 或者可以点击 Revert 进行回滚。
+
+		![](img/code-review_8.png)
+
+- 查看 Merge Request 的状态
+
+	![](img/code-review_9.png)
+
+	
 
 ## 相关阅读
 [让 Code Review成为一种习惯](http://mobile.51cto.com/aprogram-472272.htm)
