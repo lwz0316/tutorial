@@ -149,6 +149,8 @@ Git Flow 模型全貌图
 
 	![项目 成员 接到通知进行 Review](img/code-review_4.png)
 
+	![项目 成员 接到通知进行 Review](img/code-review_10.png)
+
 - 项目 Owner 是否 Merge 的依据就是 `赞` 的个数。`赞`的人多了，离 Merge 就不远了
 
 	- 这个 Merge Request 收集到了 2 个赞
