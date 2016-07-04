@@ -80,7 +80,7 @@ Git Flow 模型全貌图
 - 删除本地的 `hotfix/1.0` 分支（因为其的生命周期已经结束）
 - 切回到 `feature/xiaowen/1.2` 进行 1.2 的需求开发
 
-最后附上 Git Flow 高清无码大图 [下载地址](http://github.com/downloads/nvie/gitflow/Git-branching-model-src.key.zip) 
+最后附上 Git Flow 高清无码大图 [下载地址](http://github.com/downloads/nvie/gitflow/Git-branching-model-src.key.zip)（可以将其打印出来，以便随时查看）。 
 
 ## 利用 GitLab 进行 Code Review
 
