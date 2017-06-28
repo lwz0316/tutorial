@@ -10,6 +10,8 @@ Tutorial
 
 - [Git 简易教程](git/simple/README.md) 
 
-- [Git Flow & Gitlab based Code Review](git/Git Flow & Code Review/README.md) 
+- [Git Flow and Gitlab based Code Review](git/Git Flow & Code Review/README.md)
+ 
+- [Useful git commands: reset and revert](git/useful-git-commands/reset-and-revert.md)
 	
 	
