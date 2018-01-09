@@ -98,7 +98,7 @@ C' 表示 C 这条记录的反操作，即 (添加)' => 删除，(增加)' => �
 
     ```shell
     $ git reset --hard 02643da5
-    HEAD is now at 10dab47 修改
+    HEAD is now at 02643da5 修改
     
     $ git status
     On branch develop
